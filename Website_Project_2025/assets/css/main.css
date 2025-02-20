@@ -6,6 +6,9 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
+html {
+  scroll-behavior: smooth;
+}
 
 html,
 body,
@@ -275,16 +278,6 @@ sup {
 
 br.clear {
   clear: both;
-}
-
-p,
-ul,
-ol,
-dl,
-table,
-blockquote,
-form {
-  margin-bottom: 2em;
 }
 
 /* Container */
@@ -2098,13 +2091,13 @@ ul.actions.special {
 
 .wrapper.style1 {
   background: #20042f url("images/overlay.png");
-  color: #eee;
+  color: #000000;
   color: rgba(255, 255, 255, 0.75);
 }
 
 .wrapper.style1 .title {
   background: #65506eb0 url("images/overlay.png");
-  color: #fff;
+  color: #000000;
 }
 
 .wrapper.style1 h1,
@@ -2120,21 +2113,21 @@ ul.actions.special {
 }
 
 .wrapper.style2 {
-  background: #fff;
+  background: #000000;
 }
 
 .wrapper.style2 .title {
-  background: #ffffff;
+  background: #000000;
   color: #484d55;
 }
 
 .wrapper.style3 {
-  background: #f3f3f3 url("images/overlay.png");
+  background: #000000 url("images/overlay.png");
 }
 
 .wrapper.style3 .title {
-  background: #f3f3f3 url("images/overlay.png");
-  color: #484d55;
+  background: #000000 url("images/overlay.png");
+  color: #000000;
 }
 
 .wrapper.style3 .image {
@@ -2180,13 +2173,13 @@ ul.actions.special {
 }
 
 .homepage #header {
-  height: 11em;
+  height: 9em;
 }
 
 /* Logo */
 
 #logo {
-  width: 50%;
+  width: 45%;
   text-align: center;
   position: relative;
 }
@@ -2195,7 +2188,7 @@ ul.actions.special {
   font-weight: 900;
   text-transform: uppercase;
   color: #b1b4b9;
-  font-size: 4em;
+  font-size: 3em;
   letter-spacing: 0.25em;
 }
 
@@ -2205,7 +2198,8 @@ ul.actions.special {
   text-transform: uppercase;
   display: block;
   letter-spacing: 0.2em;
-  font-size: 0.9em;
+  font-size: 0.6em;
+  margin-top: 10px;
 }
 
 /* Nav */
@@ -2213,31 +2207,47 @@ ul.actions.special {
 #nav {
   position: absolute;
   display: block;
-  top: 2.5em;
-  left: -2.5em;
   width: 100%;
   text-align: right;
 }
 
-#nav > ul {
+#nav .menu-container {
+  width: 54%;
+  float: right;
+}
+
+#nav .menu-inner-container {
+  height: 9em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 20px;
+}
+
+#nav .title-text {
+  display: flex;
+  align-items: center;
+}
+
+#nav > div > div > ul {
   display: inline-block;
   border-radius: 0.35em;
   box-shadow: inset 0px 0px 1px 1px rgba(255, 255, 255, 0.25);
-  padding: 0 1.5em 0 1.5em;
+  padding: 0 1em 0 1em;
 }
 
-#nav > ul > li {
+#nav > div > div > ul > li {
   display: inline-block;
   text-align: center;
-  padding: 0 1.5em 0 1.5em;
+  padding: 0 0.8em 0 0.8em;
 }
 
-#nav > ul > li > ul {
+#nav > div > div > ul > li > ul {
   display: none;
 }
 
-#nav > ul > li > a,
-#nav > ul > li > span {
+#nav > div > div > ul > li > a,
+#nav > div > div > ul > li > span {
   display: block;
   color: #000000;
   color: rgba(255, 255, 255, 0.75);
@@ -2255,12 +2265,12 @@ ul.actions.special {
   outline: 0;
 }
 
-#nav > ul > li:hover > a {
+#nav > div > div > ul > li:hover > a {
   color: #fff;
 }
 
-#nav > ul > li.active > a,
-#nav > ul > li.active > span {
+#nav > div > div > ul > li.active > a,
+#nav > div > div > ul > li.active > span {
   color: #fff;
 }
 
@@ -2351,6 +2361,9 @@ ul.actions.special {
 }
 
 /* Features */
+#features {
+  margin: 25px;
+}
 
 #features header.style1 {
   padding-bottom: 5em;
@@ -2559,10 +2572,6 @@ ul.actions.special {
   }
 
   /* Logo */
-
-  #logo {
-    margin-top: -0.5em !important;
-  }
 
   #logo h1 {
     font-size: 1.75em;
