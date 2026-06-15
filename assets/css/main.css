@@ -3171,21 +3171,23 @@ section#intro.wrapper {
 }
 
 .project-entry {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 2.5em 0;
-  max-width: 800px;
-  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3em 0;
+}
+
+.project-entry:first-of-type {
+  border-top: none;
+  padding-top: 0;
 }
 
 .project-header {
   display: flex;
-  gap: 2em;
+  gap: 3em;
   align-items: center;
-  margin-bottom: 1.5em;
 }
 
 .project-logo {
-  flex: 0 0 340px;
+  flex: 0 0 38%;
 }
 
 .project-logo img {
@@ -3194,17 +3196,13 @@ section#intro.wrapper {
   display: block;
 }
 
-.project-steam {
-  margin: 1em 0 0;
-  font-size: 0.95em;
-}
-
 .project-meta {
   flex: 1;
 }
 
-.project-entry:first-of-type {
-  border-top: none;
+.project-steam {
+  margin: 1em 0 0;
+  font-size: 0.95em;
 }
 
 .project-title {
