@@ -2182,6 +2182,9 @@ ul.actions.special {
   width: 45%;
   text-align: center;
   position: relative;
+  height: 9em;
+  display: flex;
+  align-items: center;
 }
 
 #logo h1 {
@@ -2328,7 +2331,7 @@ ul.actions.special {
 /* Intro */
 
 #intro {
-  padding-bottom: 8em;
+  padding: 3em 0 3em 0;
   text-align: center;
 }
 
@@ -2360,9 +2363,72 @@ ul.actions.special {
   margin: 0 auto;
 }
 
-/* Features */
+/* Override wrapper default padding for intro video section */
+section#intro.wrapper {
+  padding: 3em 2em;
+}
+
+/* Features / About */
 #features {
-  margin: 25px;
+  padding: 4em 2em;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-grid {
+  display: flex;
+  align-items: center;
+  gap: 3em;
+}
+
+.about-photo {
+  flex: 0 0 280px;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+.about-text {
+  flex: 1;
+  text-align: left;
+}
+
+.about-text h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: #484d55;
+}
+
+.about-text h3 {
+  margin: 1.2em 0 0.4em;
+  color: #484d55;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85em;
+}
+
+.about-text p {
+  color: #919499;
+  line-height: 1.7;
+  margin: 0;
+}
+
+@media screen and (max-width: 736px) {
+  .about-grid {
+    flex-direction: column;
+    text-align: center;
+  }
+  .about-photo {
+    flex: 0 0 auto;
+    width: 200px;
+    margin: 0 auto;
+  }
+  .about-text {
+    text-align: center;
+  }
 }
 
 #features header.style1 {
@@ -3091,66 +3157,115 @@ ul.actions.special {
 
   #copyright {
     padding-top: 0;
-    margin-top: 4em;
-    border-top: 0;
-  }
-
-  #copyright ul {
-    padding: 1em 2em;
-    width: 100%;
-  }
-
-  #copyright ul li {
-    display: block;
-    margin: 0.5em 0 0 0;
-    border-left: 0;
-    padding: 0;
-  }
-
-  #copyright ul li:first-child {
-    margin-top: 0;
-  }
-
-  /* Base styles - for larger screens */
-  body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
     margin: 0;
-    padding: 0;
   }
 
-  .container {
-    width: 80%;
-    margin: 0 auto;
+}
+
+/* ========================
+   Credits Page
+   ======================== */
+
+#credits-main .container > header.style1 {
+  margin-bottom: 3em;
+}
+
+.project-entry {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 2.5em 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.project-header {
+  display: flex;
+  gap: 2em;
+  align-items: flex-start;
+  margin-bottom: 1.5em;
+}
+
+.project-logo {
+  flex: 0 0 260px;
+}
+
+.project-logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.project-meta {
+  flex: 1;
+}
+
+.project-entry:first-of-type {
+  border-top: none;
+}
+
+.project-title {
+  font-size: 1.6em;
+  color: #484d55;
+  margin-bottom: 0.3em;
+}
+
+.project-credits {
+  color: #484d55;
+  font-size: 0.95em;
+  margin-bottom: 0.3em;
+}
+
+.project-developer {
+  color: #919499;
+  font-size: 0.9em;
+  margin-bottom: 0.8em;
+}
+
+.project-description {
+  color: #484d55;
+  font-size: 1.05em;
+  line-height: 1.7;
+  margin-bottom: 1em;
+  font-style: italic;
+}
+
+.project-details p {
+  color: #919499;
+  line-height: 1.7;
+  margin-bottom: 1em;
+}
+
+.project-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em 2em;
+}
+
+.project-features li {
+  color: #919499;
+  line-height: 1.6;
+  padding-left: 1em;
+  border-left: 2px solid #f98780;
+}
+
+.project-features li strong {
+  color: #484d55;
+}
+
+@media screen and (max-width: 736px) {
+  .project-features {
+    grid-template-columns: 1fr;
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
+  .project-header {
+    flex-direction: column;
   }
 
-  /* Media query for tablets (768px and below) */
-  @media screen and (max-width: 768px) {
-    .container {
-      width: 90%;
-    }
-    body {
-      font-size: 14px;
-    }
-  }
-
-  /* Media query for mobile devices (480px and below) */
-  @media screen and (max-width: 480px) {
-    .container {
-      width: 95%;
-    }
-    body {
-      font-size: 12px;
-    }
-    nav ul {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  .project-logo {
+    flex: none;
+    width: 100%;
+    max-width: 320px;
   }
 }
