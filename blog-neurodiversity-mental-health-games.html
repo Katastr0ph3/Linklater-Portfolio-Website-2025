@@ -76,7 +76,145 @@
 
             <p>It is estimated that between 15-20% (roughly one in five) of the population are neurodivergent.</p>
 
-            <img src="images/neurodiversity-umbrella.gif" alt="Neurodiversity umbrella animation showing the range of neurodivergent conditions" style="width:100%;max-width:560px;display:block;margin:1.5em auto 2em;" />
+            <canvas id="nd-umb" aria-label="Animation: 1 in 5 people are neurodiverse. An umbrella with rainbow segments opens over a highlighted figure in a row of five, illustrating that neurodiversity is an umbrella term." style="width:100%;max-width:560px;height:auto;display:block;margin:1.5em auto 2em;"></canvas>
+            <script>
+            (function(){
+              var dpr=window.devicePixelRatio||1,W=560,H=320;
+              var c=document.getElementById('nd-umb');
+              c.width=W*dpr; c.height=H*dpr;
+              var ctx=c.getContext('2d');
+              ctx.scale(dpr,dpr);
+              var cx=W/2,cyC=106,R=64,hBot=206,pY=270,sp=90;
+              var DROOP=22*Math.PI/180;
+              var N=6,START=Math.PI-DROOP,SPAN=Math.PI+2*DROOP,PANG=SPAN/N;
+              var SAG=0.65;
+              var pxs=[cx-2*sp,cx-sp,cx,cx+sp,cx+2*sp];
+              var COLS=['#E63946','#E97A27','#E9C434','#57CC99','#4895EF','#9B5DE5'];
+              var startTime=null,animating=false,elapsed=0;
+              function eo(t){return 1-Math.pow(1-t,3);}
+              function c01(t){return t<0?0:t>1?1:t;}
+              function pr(t,s,d){return eo(c01((t-s)/d));}
+              function drawCanopy(p){
+                if(p<=0) return;
+                var r=R*p;
+                for(var i=0;i<N;i++){
+                  var a1=START+i*PANG,a2=START+(i+1)*PANG,amid=(a1+a2)/2;
+                  var x1=cx+r*Math.cos(a1),y1=cyC+r*Math.sin(a1);
+                  var x2=cx+r*Math.cos(a2),y2=cyC+r*Math.sin(a2);
+                  var cpx=cx+r*SAG*Math.cos(amid),cpy=cyC+r*SAG*Math.sin(amid);
+                  ctx.beginPath();
+                  ctx.moveTo(cx,cyC);
+                  ctx.lineTo(x1,y1);
+                  ctx.quadraticCurveTo(cpx,cpy,x2,y2);
+                  ctx.closePath();
+                  ctx.fillStyle=COLS[i];
+                  ctx.fill();
+                }
+                ctx.save();
+                ctx.strokeStyle='rgba(0,0,0,0.35)';
+                ctx.lineWidth=1.5;
+                for(var j=0;j<=N;j++){
+                  var a=START+j*PANG;
+                  ctx.beginPath();
+                  ctx.moveTo(cx,cyC);
+                  ctx.lineTo(cx+r*Math.cos(a),cyC+r*Math.sin(a));
+                  ctx.stroke();
+                }
+                ctx.restore();
+                if(p>0.7){
+                  var cp=c01((p-0.7)/0.3);
+                  ctx.save();ctx.globalAlpha=cp;
+                  ctx.beginPath();ctx.arc(cx,cyC,6,0,Math.PI*2);
+                  ctx.fillStyle='rgba(255,255,255,0.95)';ctx.fill();
+                  ctx.restore();
+                }
+              }
+              function drawHandle(p){
+                var ty=cyC+5,by=ty+(hBot-ty)*p;
+                ctx.save();
+                ctx.strokeStyle='rgba(255,255,255,0.82)';
+                ctx.lineWidth=3;ctx.lineCap='round';
+                ctx.beginPath();ctx.moveTo(cx,ty);ctx.lineTo(cx,by);ctx.stroke();
+                if(p>0.88){
+                  var hp=c01((p-0.88)/0.12);
+                  ctx.globalAlpha=hp;
+                  ctx.beginPath();
+                  ctx.arc(cx+12,hBot,12,Math.PI,Math.PI+Math.PI*hp,false);
+                  ctx.stroke();
+                }
+                ctx.restore();
+              }
+              function drawPersons(t,el){
+                var order=[2,1,3,0,4];
+                for(var oi=0;oi<5;oi++){
+                  var idx=order[oi];
+                  var pa=pr(t,1.55+oi*0.1,0.38);
+                  if(pa<=0) continue;
+                  var x=pxs[idx],hi=(idx===2);
+                  var headY=pY-40,hR=12,shoulderY=headY+hR+4,bodyH=24;
+                  if(hi&&el>3.2){
+                    var pulse=0.5+0.5*Math.sin((el-3.2)*2.2);
+                    ctx.save();ctx.globalAlpha=pa*0.18*pulse;
+                    ctx.beginPath();ctx.arc(x,headY,hR+8+3*pulse,0,Math.PI*2);
+                    ctx.fillStyle='#9B8FEE';ctx.fill();ctx.restore();
+                  }
+                  ctx.save();ctx.globalAlpha=pa;
+                  var col=hi?'#A09AEE':'rgba(255,255,255,0.45)';
+                  ctx.beginPath();ctx.arc(x,headY,hR,0,Math.PI*2);
+                  ctx.fillStyle=col;ctx.fill();
+                  ctx.beginPath();
+                  ctx.moveTo(x-8,shoulderY);ctx.lineTo(x+8,shoulderY);
+                  ctx.lineTo(x+12,shoulderY+bodyH);ctx.lineTo(x-12,shoulderY+bodyH);
+                  ctx.closePath();ctx.fill();ctx.restore();
+                }
+              }
+              function drawText(t){
+                var a1=pr(t,2.15,0.55),a2=pr(t,2.65,0.5);
+                if(a1<=0&&a2<=0) return;
+                ctx.save();ctx.textBaseline='middle';
+                var lY=pY+18;
+                if(a1>0){
+                  ctx.globalAlpha=a1;
+                  ctx.font='bold 17px "Source Sans Pro",Arial,sans-serif';
+                  var p1='1 in 5 ',p2='people are neurodiverse';
+                  var w1=ctx.measureText(p1).width,w2=ctx.measureText(p2).width;
+                  var sx=cx-(w1+w2)/2;
+                  ctx.fillStyle='#E9C434';ctx.fillText(p1,sx,lY);
+                  ctx.fillStyle='rgba(255,255,255,0.9)';ctx.fillText(p2,sx+w1,lY);
+                }
+                if(a2>0){
+                  ctx.globalAlpha=a2;
+                  ctx.font='13px "Source Sans Pro",Arial,sans-serif';
+                  ctx.textAlign='center';
+                  ctx.fillStyle='rgba(255,255,255,0.42)';
+                  ctx.fillText('Neurodiversity is an umbrella term.',cx,lY+24);
+                }
+                ctx.restore();
+              }
+              var LOOP_PAUSE=4,ANIM_DUR=3.5;
+              function frame(ts){
+                if(!animating) return;
+                if(!startTime) startTime=ts;
+                elapsed=(ts-startTime)/1000;
+                var t=elapsed%(ANIM_DUR+LOOP_PAUSE);
+                if(t>ANIM_DUR) t=ANIM_DUR;
+                ctx.clearRect(0,0,W,H);
+                drawCanopy(pr(t,0.35,1.4));
+                drawHandle(pr(t,0,0.82));
+                drawPersons(t,elapsed);
+                drawText(t);
+                requestAnimationFrame(frame);
+              }
+              var obs=new IntersectionObserver(function(e){
+                if(e[0].isIntersecting&&!animating){
+                  animating=true;startTime=null;requestAnimationFrame(frame);
+                } else if(!e[0].isIntersecting){
+                  animating=false;
+                }
+              },{threshold:0.2});
+              obs.observe(c);
+            })();
+            </script>
 
             <p>
               That's not a niche figure. Roughly one in five people you know, work with, or play games alongside is neurodivergent — whether diagnosed or not. Neurodivergence is an umbrella term covering a broad range of neurological differences: autism spectrum disorder (ASD), attention deficit hyperactivity disorder (ADHD), dyslexia, dyspraxia, Tourette's syndrome, and more. Each of these conditions is distinct, and people within them can experience the world in vastly different ways — but what they share is a brain that doesn't match the neurotypical template that most of our social systems, workplaces, and yes, games were built around.
