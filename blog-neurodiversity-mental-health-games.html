@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Why Neurodivergent People Are Already Using Video Games as a Mental Health Tool | Cat Linklater Audio</title>
+    <meta name="description" content="Cat Linklater explores the intersection of neurodiversity, mental health, and video games — and what it means for game audio design." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://www.catlinklateraudio.com/blog-neurodiversity-mental-health-games.html" />
+    <meta property="og:title" content="Why Neurodivergent People Are Already Using Video Games as a Mental Health Tool" />
+    <meta property="og:description" content="Cat Linklater explores the intersection of neurodiversity, mental health, and video games — and what it means for game audio design." />
+    <meta property="og:image" content="https://www.catlinklateraudio.com/images/neurodiversity-umbrella.gif" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Why Neurodivergent People Are Already Using Video Games as a Mental Health Tool" />
+    <meta name="twitter:description" content="Cat Linklater explores the intersection of neurodiversity, mental health, and video games." />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" href="images/CatLogo5.png" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body class="homepage is-preload">
+    <div id="page-wrapper">
+
+      <!-- Header -->
+      <section id="header" class="wrapper">
+        <h1><a href="#" class="image featured"> </a></h1>
+        <nav id="nav">
+          <div id="logo" style="float: left">
+            <div style="display: flex">
+              <img src="images/CatLogo5.png" alt="Cat Logo" style="width:100px;height:100px;margin:20px;" />
+              <div class="title-text">
+                <div>
+                  <h1>Cat Linklater</h1>
+                  <p>Video Game Sound Designer, Composer and Audio Implementer</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-container">
+            <div class="menu-inner-container">
+              <ul class="menu">
+                <li><a href="index.html">Home</a></li>
+                <li>
+                  <a href="game-audio.html">Game Audio</a>
+                  <ul>
+                    <li><a href="game-audio.html#sounddesign">Sound Design</a></li>
+                    <li><a href="game-audio.html#audioimplementation">Audio Implementation</a></li>
+                    <li><a href="game-audio.html#audioprogramming">Audio Programming</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a href="composition.html">Composition</a>
+                  <ul>
+                    <li><a href="composition.html">Video Games</a></li>
+                    <li><a href="composition.html#film-composition">Film</a></li>
+                  </ul>
+                </li>
+                <li><a href="credits.html">Credits</a></li>
+                <li class="current"><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#Contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </section>
+
+      <!-- Post Content -->
+      <section id="blog-main" class="wrapper style2">
+        <div class="container">
+
+          <p class="blog-post-meta" style="margin-bottom:0.5em;">
+            <a href="blog.html">&larr; Back to Blog</a>
+          </p>
+
+          <article class="blog-post-full">
+            <p class="blog-post-meta">June 2026 &nbsp;·&nbsp; Cat Linklater</p>
+            <h2>Why Neurodivergent People Are Already Using Video Games as a Mental Health Tool — And What That Means for Game Audio</h2>
+
+            <p>It is estimated that between 15-20% (roughly one in five) of the population are neurodivergent.</p>
+
+            <img src="images/neurodiversity-umbrella.gif" alt="Neurodiversity umbrella animation showing the range of neurodivergent conditions" style="width:100%;max-width:560px;display:block;margin:1.5em auto 2em;" />
+
+            <p>
+              That's not a niche figure. Roughly one in five people you know, work with, or play games alongside is neurodivergent — whether diagnosed or not. Neurodivergence is an umbrella term covering a broad range of neurological differences: autism spectrum disorder (ASD), attention deficit hyperactivity disorder (ADHD), dyslexia, dyspraxia, Tourette's syndrome, and more. Each of these conditions is distinct, and people within them can experience the world in vastly different ways — but what they share is a brain that doesn't match the neurotypical template that most of our social systems, workplaces, and yes, games were built around.
+            </p>
+            <p>
+              When one in five people are navigating a world that wasn't designed for them, the question of how media — and specifically games — either serves or fails them becomes a lot more urgent.
+            </p>
+
+            <p>And critically: no two neurodivergent people are alike. The same diagnosis can look completely different from person to person. The animation below shows six different profiles — each one a different pattern of traits, all of them valid, all of them real.</p>
+
+            <div style="text-align:center;padding:1.5em 0 0.5em;">
+              <canvas id="nd-wheel" style="max-width:100%;display:block;margin:0 auto;"></canvas>
+              <div style="margin-top:0.75em;min-height:44px;">
+                <p id="nd-pname" style="font-size:14px;font-weight:700;color:#ffffff;margin:0;"></p>
+                <p id="nd-pdesc" style="font-size:13px;color:rgba(255,255,255,0.55);margin:0.2em auto 0;max-width:400px;line-height:1.5;"></p>
+              </div>
+              <div id="nd-dots" style="display:flex;justify-content:center;gap:8px;margin-top:0.75em;"></div>
+            </div>
+
+            <script>
+            (function(){
+              var TRAITS=['Fixations','Speech patterns','Sensory sensitivity','Social','Anxiety','Body language','Eye contact','Stimming','Emotion regulation','Low mood'];
+              var COLORS=['#7F77DD','#378ADD','#1D9E75','#90BE00','#EF9F27','#D85A30','#E24B4A','#D4537E','#534AB7','#185FA5'];
+              var PROFILES=[
+                {name:'Person A',desc:'Intense special interests and sensory sensitivity; mild social differences',values:[0.92,0.35,0.9,0.28,0.6,0.22,0.65,0.7,0.42,0.3]},
+                {name:'Person B',desc:'Primarily social and speech differences; lower sensory impact',values:[0.38,0.88,0.28,0.92,0.68,0.82,0.88,0.18,0.58,0.48]},
+                {name:'Person C',desc:'High anxiety and low mood; moderate sensory and social experience',values:[0.48,0.52,0.62,0.52,0.94,0.38,0.42,0.48,0.9,0.88]},
+                {name:'Person D',desc:'Primarily expressed through stimming and movement behaviours',values:[0.28,0.48,0.72,0.38,0.48,0.9,0.28,0.96,0.58,0.32]},
+                {name:'Person E',desc:'Strong speech differences with high fixation intensity; calmer mood',values:[0.9,0.92,0.42,0.68,0.35,0.52,0.58,0.38,0.45,0.3]},
+                {name:'Person F',desc:'Broadly distributed across all areas at moderate levels',values:[0.55,0.58,0.62,0.56,0.6,0.54,0.58,0.52,0.6,0.55]}
+              ];
+              var N=10,SEG=Math.PI*2/N,GAP=0.05;
+              var dpr=window.devicePixelRatio||1,SIZE=460;
+              var canvas=document.getElementById('nd-wheel');
+              canvas.width=SIZE*dpr;canvas.height=SIZE*dpr;
+              canvas.style.width=SIZE+'px';canvas.style.height=SIZE+'px';
+              var ctx=canvas.getContext('2d');
+              ctx.scale(dpr,dpr);
+              var cx=SIZE/2,cy=SIZE/2,MAX_R=140,MIN_R=18,LBL_R=175;
+              var cur=PROFILES[0].values.slice(),tgt=PROFILES[0].values.slice(),pi=0,raf=null;
+
+              function draw(){
+                ctx.clearRect(0,0,SIZE,SIZE);
+                for(var r=1;r<=4;r++){
+                  ctx.beginPath();ctx.arc(cx,cy,MIN_R+r/4*(MAX_R-MIN_R),0,Math.PI*2);
+                  ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.lineWidth=1;ctx.stroke();
+                }
+                for(var i=0;i<N;i++){
+                  var sa=i*SEG-Math.PI/2+GAP/2,ea=(i+1)*SEG-Math.PI/2-GAP/2;
+                  var rad=MIN_R+cur[i]*(MAX_R-MIN_R);
+                  ctx.beginPath();
+                  ctx.moveTo(cx+MIN_R*Math.cos(sa),cy+MIN_R*Math.sin(sa));
+                  ctx.arc(cx,cy,rad,sa,ea);
+                  ctx.arc(cx,cy,MIN_R,ea,sa,true);
+                  ctx.closePath();
+                  ctx.fillStyle=COLORS[i];ctx.globalAlpha=0.82;ctx.fill();ctx.globalAlpha=1;
+                }
+                ctx.textAlign='center';ctx.textBaseline='middle';
+                ctx.fillStyle='rgba(255,255,255,0.82)';ctx.font='12px "Source Sans Pro",sans-serif';
+                for(var i=0;i<N;i++){
+                  var ang=i*SEG+SEG/2-Math.PI/2;
+                  var lx=cx+LBL_R*Math.cos(ang),ly=cy+LBL_R*Math.sin(ang);
+                  var words=TRAITS[i].split(' ');
+                  if(words.length===1){ctx.fillText(words[0],lx,ly);}
+                  else if(words.length===2){ctx.fillText(words[0],lx,ly-7);ctx.fillText(words[1],lx,ly+7);}
+                  else{ctx.fillText(words[0]+' '+words[1],lx,ly-7);ctx.fillText(words[2],lx,ly+7);}
+                }
+              }
+
+              function step(){
+                var done=true;
+                for(var i=0;i<N;i++){cur[i]+=(tgt[i]-cur[i])*0.07;if(Math.abs(cur[i]-tgt[i])>0.004)done=false;}
+                draw();if(!done)raf=requestAnimationFrame(step);
+              }
+
+              function goTo(idx){
+                pi=idx;tgt=PROFILES[idx].values.slice();
+                cancelAnimationFrame(raf);step();
+                document.getElementById('nd-pname').textContent=PROFILES[idx].name;
+                document.getElementById('nd-pdesc').textContent=PROFILES[idx].desc;
+                document.querySelectorAll('.nd-dot').forEach(function(d,i){
+                  d.style.background=i===idx?'rgba(255,255,255,0.9)':'rgba(255,255,255,0.3)';
+                  d.style.transform=i===idx?'scale(1.4)':'scale(1)';
+                });
+              }
+
+              var dc=document.getElementById('nd-dots');
+              PROFILES.forEach(function(_,i){
+                var b=document.createElement('span');
+                b.className='nd-dot';
+                b.style.cssText='display:inline-block;width:10px;height:10px;border-radius:50%;cursor:pointer;transition:background 0.25s,transform 0.25s;background:rgba(255,255,255,0.3);flex-shrink:0;';
+                b.setAttribute('role','button');
+                b.setAttribute('aria-label','Profile '+(i+1));
+                b.addEventListener('click',function(){clearInterval(auto);goTo(i);});
+                dc.appendChild(b);
+              });
+
+              var auto=setInterval(function(){goTo((pi+1)%PROFILES.length);},3200);
+              goTo(0);
+            })();
+            </script>
+
+            <h3>But it goes deeper — sensory seeking vs sensory averse</h3>
+            <p>
+              When we zoom into the sensory sensitivity category, there's another layer to consider. Neurodivergents don't all respond to sensory input the same way. Some are <strong>sensory seeking</strong> — their nervous system craves intense stimulation and actively wants more of it. Others are <strong>sensory averse</strong> — the same stimulus that feels exciting to a sensory seeker can feel genuinely overwhelming, even painful.
+            </p>
+            <p>
+              Take spicy food. One neurodivergent person might love the heat — it's satisfying, stimulating, exactly what they need. Another might find the exact same dish completely unbearable. Same food. Completely different nervous systems.
+            </p>
+
+
+            <p>
+              The same is true for audio. A soundscape one player finds exciting and immersive could push another into sensory overload. This is why it's crucial that we try to accommodate neurodivergent players through a multitude of approaches rather than designing for a single "normal" experience — which I'll explore further below.
+            </p>
+
+            <p>
+              I've been thinking a lot about this intersection between neurodiversity, mental health, and video games. Not just as someone who makes audio for games, but as a neurodivergent person myself. This is something I care about deeply — and something I think the games industry doesn't talk about nearly enough.
+            </p>
+
+            <h3>The Global Mental Health Gap</h3>
+            <p>
+              Globally, there is fewer than one mental health professional for every 10,000 people. That's not a rounding error — it's a crisis. And it falls disproportionately on neurodivergent people, who are significantly more likely to experience anxiety, depression, burnout, and other mood disorders. These aren't purely biological — they're often the result of navigating a world that simply wasn't designed with neurodivergent brains in mind.
+            </p>
+            <p>
+              When people can't access professional support, they find other ways to cope. Some turn to social media, self-help communities, Reddit threads, books. Others turn to less healthy outlets. And a huge number — quietly, instinctively — turn to video games.
+            </p>
+
+            <h3>Neurodivergents Are Already Self-Medicating Through Games</h3>
+            <p>
+              Here's a statistic that stopped me in my tracks: 41.4% of autistic youths play video games, compared to 18% of neurotypical youths. That's more than double. Neurodivergent people are already using games to cope with a reality that wasn't built for them — to decompress, to regulate, to find spaces where they belong and can succeed on their own terms.
+            </p>
+            <p>
+              This isn't accidental. Video games offer something uniquely valuable: a space where the rules are explicit, failure is recoverable, sensory input is controllable, and social interaction can happen on your own terms. For someone whose nervous system is constantly overloaded by the unpredictability of the real world, that matters enormously.
+            </p>
+
+            <h3>What Video Games Can (and Can't) Offer</h3>
+            <p>
+              Games can't replace mental health professionals — that needs to be said clearly. But they can do something therapists often struggle to do: meet people where they are, in a medium they already inhabit and trust.
+            </p>
+            <p>
+              Games can help players develop empathy and self-understanding. They can provide a safe space to practise social interaction and emotional regulation. They can challenge stereotypes, represent neurodivergent experiences, and give players a sense of agency and mastery. Organisations like the UN and Games for Change have already recognised this — they've forged alliances specifically around using games to support global mental health.
+            </p>
+            <p>
+              What games can't do is provide the individualised, therapeutic relationship that a trained professional offers. Neurodivergents present in enormously varied ways, and there's no one-size-fits-all solution. The goal isn't to replace care — it's to extend it, and to reduce the burden on systems that are already overwhelmed.
+            </p>
+
+            <h3>How Neurodivergent Auditory Systems Work Differently</h3>
+            <p>
+              The auditory system in neurodivergents is able to take in more information, which acts as a double edged sword as it functions similarly to a condenser microphone by picking up lots of detailed auditory information and processing it simultaneously, however it does not have the ability to filter out or prioritise what is being picked up. People with ADHD and ASD are often also diagnosed with comorbid Auditory Processing Disorder (APD), which can hinder one's ability to focus on specific sounds in noisy environments.
+            </p>
+            <p>
+              Research has shown that neurodivergents process sensory information differently to their neurotypical counterparts, which can sometimes contribute to an enhanced vibrant and enriched world experience. These differences can sometimes act as a double edged sword as they may also cause a multitude of problems.
+            </p>
+            <p>
+              Neurodivergents can also often be extremely detail oriented and thus can pick up vast amounts of both auditory and visual information. In a game context, the high levels of information neurodivergents may pick up will either make or break the authentic feeling of a particular game world.
+            </p>
+
+            <h3>Where Game Audio Fits Into This</h3>
+            <p>
+              This is where I think about my own work differently. Sound is one of the most powerful emotional levers in a game — and it's one of the most significant sensory inputs for neurodivergent players. A poorly designed soundscape can be genuinely overwhelming. Unexpected sounds, harsh audio feedback, or music that can't be adjusted can make a game inaccessible for people who are already navigating sensory sensitivities.
+            </p>
+            <p>
+              But when audio is designed thoughtfully — with dynamic mixing, clear audio cues, layered ambience that breathes rather than blares — it can be grounding. It can signal safety. It can make a game world feel like somewhere you actually want to be.
+            </p>
+            <p>
+              I don't think we talk about this enough in game audio. We talk about immersion, about emotion, about storytelling. We don't often talk about the neurodivergent player who might be using our game to regulate their nervous system at 2am, and whether the sounds we're making are helping or hurting that.
+            </p>
+
+            <h3>Going Forward</h3>
+            <p>
+              I'm going to keep writing about this. In future posts I want to dig into specific questions: How can games be designed to be genuinely inclusive of neurodivergent players? What does sensory-aware audio design actually look like in practice? Why are video games uniquely placed compared to other media when it comes to building empathy and social understanding?
+            </p>
+            <p>
+              If this resonates with you — whether you're a neurodivergent player, a developer, or someone working in mental health — I'd love to hear your thoughts. You can reach me at <a href="mailto:info@catlinklateraudio.com">info@catlinklateraudio.com</a> or find me on <a href="https://x.com/Cat_Linklater" target="_blank" rel="noopener">X/Twitter</a> and <a href="https://www.linkedin.com/in/catlinklateraudio/" target="_blank" rel="noopener">LinkedIn</a>.
+            </p>
+
+            <p style="margin-top:2.5em;">
+              <a href="blog.html" class="button style1">&larr; Back to Blog</a>
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section id="footer" class="wrapper">
+        <header class="style1">
+          <h2>Interested in collaborating?</h2>
+          <p>If you would like creative assistance on video game or film projects then feel free to get in touch.</p>
+        </header>
+        <div class="row">
+          <div class="col-6 col-12-medium">
+            <section>
+              <form method="post" action="mailto:info@catlinklateraudio.com" enctype="text/plain">
+                <div class="row gtr-50">
+                  <div class="col-6 col-12-small">
+                    <input type="text" name="name" id="contact-name" placeholder="Name" />
+                  </div>
+                  <div class="col-6 col-12-small">
+                    <input type="text" name="email" id="contact-email" placeholder="Email" />
+                  </div>
+                  <div class="col-12">
+                    <textarea name="message" id="contact-message" placeholder="Message" rows="4"></textarea>
+                  </div>
+                  <div class="col-12">
+                    <ul class="actions">
+                      <li><input type="submit" class="style1" value="Send" /></li>
+                      <li><input type="reset" class="style2" value="Reset" /></li>
+                    </ul>
+                  </div>
+                </div>
+              </form>
+            </section>
+          </div>
+          <div class="col-6 col-12-medium">
+            <section class="feature-list small">
+              <div class="row">
+                <div class="col-6 col-12-small">
+                  <section>
+                    <h3 class="icon solid fa-home">Mailing Address</h3>
+                    <p>Aberdeen<br />United Kingdom<br />AB25 3AH</p>
+                  </section>
+                </div>
+                <div class="col-6 col-12-small">
+                  <section>
+                    <h3 class="icon solid fa-comment">Social</h3>
+                    <p>
+                      <a href="https://x.com/Cat_Linklater" target="_blank" rel="noopener">https://x.com/Cat_Linklater</a><br />
+                      <a href="https://www.linkedin.com/in/catlinklateraudio/" target="_blank" rel="noopener">https://www.linkedin.com/in/catlinklateraudio/</a>
+                    </p>
+                  </section>
+                </div>
+                <div class="col-6 col-12-small">
+                  <section id="Contact">
+                    <h3 class="icon solid fa-envelope">Email</h3>
+                    <p><a href="mailto:info@catlinklateraudio.com">info@catlinklateraudio.com</a></p>
+                  </section>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div id="copyright">
+          <ul>
+            <li>&copy; 2026 Cat Linklater Game Audio</li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
