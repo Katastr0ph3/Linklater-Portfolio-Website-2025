@@ -106,7 +106,78 @@
 
             <article class="blog-post-card">
               <div class="blog-card-image">
-                <img src="images/neurodiversity-umbrella.gif" alt="Neurodiversity umbrella animation" />
+                <canvas id="blog-brain-anim" style="width:100%;aspect-ratio:220/145;display:block;border-radius:6px;"></canvas>
+                <script>
+                (function(){
+                  var c=document.getElementById('blog-brain-anim');
+                  var dpr=window.devicePixelRatio||1,W=220,H=145;
+                  c.width=W*dpr;c.height=H*dpr;
+                  var ctx=c.getContext('2d');
+                  ctx.scale(dpr,dpr);
+                  var cx=W/2,cy=H/2,tt=0,lastTs=null,running=false,raf=null;
+
+                  function brain(x,y,s){
+                    ctx.save();ctx.translate(x,y);
+                    ctx.beginPath();
+                    ctx.moveTo(0,-s*0.46);
+                    ctx.bezierCurveTo(s*0.10,-s*0.56,s*0.26,-s*0.58,s*0.32,-s*0.50);
+                    ctx.bezierCurveTo(s*0.38,-s*0.42,s*0.46,-s*0.48,s*0.52,-s*0.36);
+                    ctx.bezierCurveTo(s*0.60,-s*0.22,s*0.60,-s*0.06,s*0.54,s*0.04);
+                    ctx.bezierCurveTo(s*0.48,s*0.14,s*0.58,s*0.24,s*0.52,s*0.36);
+                    ctx.bezierCurveTo(s*0.46,s*0.48,s*0.30,s*0.56,s*0.16,s*0.52);
+                    ctx.bezierCurveTo(s*0.06,s*0.48,-s*0.02,s*0.54,s*0.00,s*0.46);
+                    ctx.bezierCurveTo(-s*0.02,s*0.54,-s*0.06,s*0.48,-s*0.16,s*0.52);
+                    ctx.bezierCurveTo(-s*0.30,s*0.56,-s*0.46,s*0.48,-s*0.52,s*0.36);
+                    ctx.bezierCurveTo(-s*0.58,s*0.24,-s*0.48,s*0.14,-s*0.54,s*0.04);
+                    ctx.bezierCurveTo(-s*0.60,-s*0.06,-s*0.60,-s*0.22,-s*0.52,-s*0.36);
+                    ctx.bezierCurveTo(-s*0.46,-s*0.48,-s*0.38,-s*0.42,-s*0.32,-s*0.50);
+                    ctx.bezierCurveTo(-s*0.26,-s*0.58,-s*0.10,-s*0.56,s*0.00,-s*0.46);
+                    ctx.closePath();
+                    ctx.fillStyle='rgba(180,60,200,0.18)';ctx.fill();
+                    ctx.strokeStyle='#C45DCE';ctx.lineWidth=s*0.09;
+                    ctx.shadowColor='#C45DCE';ctx.shadowBlur=s*0.55;ctx.stroke();ctx.shadowBlur=0;
+                    ctx.strokeStyle='rgba(205,90,225,0.85)';ctx.lineWidth=s*0.075;ctx.lineCap='round';
+                    ctx.beginPath();ctx.moveTo(s*0.01,-s*0.38);ctx.bezierCurveTo(s*0.02,-s*0.15,-s*0.02,s*0.15,-s*0.01,s*0.38);ctx.stroke();
+                    ctx.strokeStyle='rgba(210,100,230,0.65)';ctx.lineWidth=s*0.065;
+                    ctx.beginPath();ctx.moveTo(-s*0.07,-s*0.30);ctx.bezierCurveTo(-s*0.32,-s*0.32,-s*0.44,-s*0.16,-s*0.44,s*0.02);ctx.bezierCurveTo(-s*0.44,s*0.18,-s*0.30,s*0.28,-s*0.08,s*0.26);ctx.stroke();
+                    ctx.beginPath();ctx.moveTo(-s*0.08,s*0.12);ctx.bezierCurveTo(-s*0.22,s*0.12,-s*0.30,s*0.22,-s*0.28,s*0.36);ctx.bezierCurveTo(-s*0.24,s*0.44,-s*0.12,s*0.46,-s*0.04,s*0.42);ctx.stroke();
+                    ctx.beginPath();ctx.moveTo(-s*0.44,-s*0.20);ctx.bezierCurveTo(-s*0.54,-s*0.08,-s*0.54,s*0.10,-s*0.44,s*0.22);ctx.stroke();
+                    ctx.beginPath();ctx.moveTo(s*0.07,-s*0.30);ctx.bezierCurveTo(s*0.32,-s*0.32,s*0.44,-s*0.16,s*0.44,s*0.02);ctx.bezierCurveTo(s*0.44,s*0.18,s*0.30,s*0.28,s*0.08,s*0.26);ctx.stroke();
+                    ctx.beginPath();ctx.moveTo(s*0.08,s*0.12);ctx.bezierCurveTo(s*0.22,s*0.12,s*0.30,s*0.22,s*0.28,s*0.36);ctx.bezierCurveTo(s*0.24,s*0.44,s*0.12,s*0.46,s*0.04,s*0.42);ctx.stroke();
+                    ctx.beginPath();ctx.moveTo(s*0.44,-s*0.20);ctx.bezierCurveTo(s*0.54,-s*0.08,s*0.54,s*0.10,s*0.44,s*0.22);ctx.stroke();
+                    ctx.restore();
+                  }
+                  function drawX(x,y,s){ctx.save();ctx.translate(x,y);ctx.strokeStyle='#4895EF';ctx.lineWidth=s*0.28;ctx.lineCap='round';ctx.shadowColor='#4895EF';ctx.shadowBlur=s*0.9;ctx.beginPath();ctx.moveTo(-s*0.36,-s*0.36);ctx.lineTo(s*0.36,s*0.36);ctx.moveTo(s*0.36,-s*0.36);ctx.lineTo(-s*0.36,s*0.36);ctx.stroke();ctx.restore();}
+                  function drawO(x,y,s){ctx.save();ctx.translate(x,y);ctx.strokeStyle='#E63946';ctx.lineWidth=s*0.24;ctx.shadowColor='#E63946';ctx.shadowBlur=s*0.9;ctx.beginPath();ctx.arc(0,0,s*0.4,0,Math.PI*2);ctx.stroke();ctx.restore();}
+                  function drawTri(x,y,s){ctx.save();ctx.translate(x,y);ctx.strokeStyle='#57CC99';ctx.lineWidth=s*0.24;ctx.lineJoin='round';ctx.lineCap='round';ctx.shadowColor='#57CC99';ctx.shadowBlur=s*0.9;ctx.beginPath();ctx.moveTo(0,-s*0.44);ctx.lineTo(s*0.4,s*0.26);ctx.lineTo(-s*0.4,s*0.26);ctx.closePath();ctx.stroke();ctx.restore();}
+                  function drawSq(x,y,s){ctx.save();ctx.translate(x,y);ctx.strokeStyle='#E97A27';ctx.lineWidth=s*0.24;ctx.lineJoin='round';ctx.shadowColor='#E97A27';ctx.shadowBlur=s*0.9;ctx.strokeRect(-s*0.36,-s*0.36,s*0.72,s*0.72);ctx.restore();}
+                  var icons=[drawX,drawO,drawTri,drawSq];
+                  var orbitR=52,orbitRy=34;
+
+                  function render(){
+                    ctx.clearRect(0,0,W,H);
+                    ctx.fillStyle='#0f1117';ctx.fillRect(0,0,W,H);
+                    var g=ctx.createRadialGradient(cx,cy,0,cx,cy,70);
+                    g.addColorStop(0,'rgba(100,50,180,0.12)');g.addColorStop(1,'rgba(0,0,0,0)');
+                    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+                    ctx.save();ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;
+                    ctx.setLineDash([2,8]);ctx.beginPath();ctx.ellipse(cx,cy,orbitR,orbitRy,0,0,Math.PI*2);ctx.stroke();
+                    ctx.setLineDash([]);ctx.restore();
+                    for(var i=0;i<4;i++){var a=tt+i*Math.PI/2;icons[i](cx+Math.cos(a)*orbitR,cy+Math.sin(a)*orbitRy,12);}
+                    var pulse=1+0.04*Math.sin(tt*1.8);
+                    brain(cx,cy,30*pulse);
+                  }
+                  function frame(ts){if(lastTs===null)lastTs=ts;tt+=(ts-lastTs)/1000*0.5;lastTs=ts;render();raf=requestAnimationFrame(frame);}
+
+                  var obs=new IntersectionObserver(function(entries){
+                    entries.forEach(function(e){
+                      if(e.isIntersecting&&!running){running=true;lastTs=null;raf=requestAnimationFrame(frame);}
+                      else if(!e.isIntersecting&&running){running=false;if(raf)cancelAnimationFrame(raf);}
+                    });
+                  },{threshold:0.1});
+                  obs.observe(c);
+                })();
+                </script>
               </div>
               <div class="blog-card-body">
                 <p class="blog-post-meta">June 2026 &nbsp;·&nbsp; Cat Linklater</p>
