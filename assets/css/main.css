@@ -2193,6 +2193,7 @@ ul.actions.special {
   color: #b1b4b9;
   font-size: 3em;
   letter-spacing: 0.25em;
+  white-space: nowrap;
 }
 
 #logo p {
