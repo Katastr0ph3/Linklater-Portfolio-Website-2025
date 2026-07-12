@@ -192,6 +192,10 @@ body.is-preload *:after {
   transition: none !important;
 }
 
+body {
+  background: #000000;
+}
+
 body,
 input,
 textarea,
@@ -1937,7 +1941,7 @@ ul.actions.special {
 }
 
 .feature-list h3 {
-  color: #590c80 !important;
+  color: #b48ecf !important;
   margin: -0.35em 0 0.75em 0;
   font-size: 1.15em;
   letter-spacing: 0.05em;
@@ -2374,6 +2378,7 @@ section#intro.wrapper {
   padding: 4em 2em;
   max-width: 1000px;
   margin: 0 auto;
+  background: #ffffff;
 }
 
 .about-grid {
@@ -2788,7 +2793,7 @@ section#intro.wrapper {
     top: 0;
     width: 100%;
     z-index: 10001;
-    background: none;
+    background: #1c1f26;
   }
 
   #titleBar .title {
@@ -3520,15 +3525,48 @@ ps {
    Hero Section
    ======================== */
 
+.hero-video {
+  position: absolute;
+  top: 50%;
+  left: 2em;
+  right: 2em;
+  transform: translateY(-50%);
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0;
+  will-change: opacity;
+}
+
 #hero {
+  height: 280vh;
+  position: relative;
   background: #0a0a0a;
-  padding: 3.5em 2em 1em;
+  padding: 0;
   text-align: left;
+  z-index: 0;
+}
+
+.hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 2em;
 }
 
 .hero-text {
+  position: relative;
+  z-index: 1;
   max-width: 900px;
   margin: 0 auto;
+  width: 100%;
+  will-change: opacity, transform;
+}
+
+.hero-line-wrap {
+  overflow: hidden;
+  line-height: 1.2;
 }
 
 .hero-line {
@@ -3540,20 +3578,24 @@ ps {
   margin: 0;
   display: block;
   letter-spacing: -0.01em;
+  transform: translateY(110%);
+  will-change: transform;
 }
 
 .hero-line--accent {
   color: rgba(255, 255, 255, 0.55);
 }
 
-@media screen and (max-width: 980px) {
-  .hero-line { font-size: 2em; }
-  #hero { padding: 2.5em 1.5em 2em; }
+.hero-line--accent {
+  color: rgba(255, 255, 255, 0.55);
 }
 
-@media screen and (max-width: 736px) {
-  .hero-line { font-size: 1.5em; }
-  #hero { padding: 2em 1.2em 1.5em; }
+#intro-mobile { display: none; }
+
+@media screen and (max-width: 980px) {
+  #hero { height: 180vh; padding: 0; }
+  .hero-sticky { position: sticky; top: 0; height: 100vh; padding: 0 1.5em; }
+  .hero-line { font-size: 2em; }
 }
 
 .blog-post-meta {

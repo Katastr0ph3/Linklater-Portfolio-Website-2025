@@ -106,30 +106,31 @@
           </nav>
         </section>
 
-        <!-- Hero -->
+        <!-- Hero + Reel crossfade -->
         <section id="hero" class="wrapper style3">
-          <div class="hero-text">
-            <p class="hero-line">Let me breathe life</p>
-            <p class="hero-line">into your game project</p>
-            <p class="hero-line hero-line--accent">with audio.</p>
+          <div class="hero-sticky">
+            <!-- Video fades in behind the text -->
+            <div class="hero-video">
+              <div style="padding:56.25% 0 0 0;position:relative;">
+                <iframe
+                  title="vimeo-player"
+                  src="https://player.vimeo.com/video/758119508?h=242358b511"
+                  frameborder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowfullscreen
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                ></iframe>
+              </div>
+            </div>
+            <!-- Text fades out over the video -->
+            <div class="hero-text">
+              <div class="hero-line-wrap"><p class="hero-line">Let me breathe life</p></div>
+              <div class="hero-line-wrap"><p class="hero-line">into your game project</p></div>
+              <div class="hero-line-wrap"><p class="hero-line hero-line--accent">with audio.</p></div>
+            </div>
           </div>
         </section>
-
-        <!-- Sound Design Reel -->
-
-        <section id="intro" class="wrapper style3">
-          <div style="padding:56.25% 0 0 0;position:relative;max-width:900px;margin:0 auto;">
-            <iframe
-              title="vimeo-player"
-              src="https://player.vimeo.com/video/758119508?h=242358b511"
-              frameborder="0"
-              allow="autoplay; fullscreen; picture-in-picture"
-              allowfullscreen
-              style="position:absolute;top:0;left:0;width:100%;height:100%;"
-            ></iframe>
-          </div>
-          <script src="https://player.vimeo.com/api/player.js"></script>
-        </section>
+        <script src="https://player.vimeo.com/api/player.js"></script>
 
         <!-- About -->
         <section id="features">
@@ -350,4 +351,66 @@
           <div id="copyright">
             <ul>
               <li>&copy; 2026 Cat Linklater Game Audio</li>
-            <li><a href="privacy.html">Privacy Policy</a></
+              <li><a href="privacy.html">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.dropotron.min.js"></script>
+    <script src="assets/js/browser.min.js"></script>
+    <script src="assets/js/breakpoints.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+      (function(){
+        var hero  = document.getElementById('hero');
+        var text  = hero.querySelector('.hero-text');
+        var video = hero.querySelector('.hero-video');
+        var lines = hero.querySelectorAll('.hero-line');
+
+        var starts   = [0.04, 0.22, 0.40]; // when each line starts revealing
+        var dur      = 0.16;  // scroll fraction each line takes to fully reveal
+        var textFade = 0.62;  // text starts fading
+        var vidFade  = 0.58;  // video starts fading IN
+
+        function ease(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
+        function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+
+        function update(){
+          var scrolled = window.pageYOffset - hero.offsetTop;
+          var total    = hero.offsetHeight - window.innerHeight;
+          var progress = clamp(scrolled / total, 0, 1);
+
+          lines.forEach(function(line, i){
+            var p = ease(clamp((progress - starts[i]) / dur, 0, 1));
+            line.style.transform = 'translateY(' + ((1-p)*110) + '%)';
+          });
+
+          var textP = ease(clamp((progress - textFade) / (1 - textFade), 0, 1));
+          text.style.opacity = 1 - textP;
+
+          var vidP = ease(clamp((progress - vidFade) / (1 - vidFade), 0, 1));
+          video.style.opacity = vidP;
+        }
+
+        window.addEventListener('scroll', update, { passive: true });
+        update();
+
+        // About section fade in from black
+        var features = document.getElementById('features');
+        features.style.opacity = 0;
+        function updateAbout() {
+          var rect = features.getBoundingClientRect();
+          var p = 1 - (rect.top / (window.innerHeight * 0.8));
+          features.style.opacity = Math.max(0, Math.min(1, p));
+        }
+        window.addEventListener('scroll', updateAbout, { passive: true });
+        updateAbout();
+      })();
+    </script>
+  </body>
+</html>
