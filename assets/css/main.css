@@ -2376,8 +2376,6 @@ section#intro.wrapper {
 /* Features / About */
 #features {
   padding: 4em 2em;
-  max-width: 1000px;
-  margin: 0 auto;
   background: #ffffff;
 }
 
@@ -2385,6 +2383,8 @@ section#intro.wrapper {
   display: flex;
   align-items: stretch;
   gap: 3em;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .about-photo {
