@@ -17,7 +17,8 @@
         name="viewport"
         content="width=device-width, initial-scale=1, user-scalable=no"
       />
-      <link rel="icon" type="image/png" href="images/CatLogo5.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-backed.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
       <link rel="stylesheet" href="assets/css/main.css" />
     </head>
     <body class="homepage is-preload">
@@ -400,13 +401,23 @@
         window.addEventListener('scroll', update, { passive: true });
         update();
 
-        // About section fade in from black
+        // About section fade in from black, mask dissolves when fully in view
         var features = document.getElementById('features');
         features.style.opacity = 0;
         function updateAbout() {
           var rect = features.getBoundingClientRect();
-          var p = 1 - (rect.top / (window.innerHeight * 0.8));
-          features.style.opacity = Math.max(0, Math.min(1, p));
+          var p = Math.max(0, Math.min(1, 1 - (rect.top / (window.innerHeight * 0.8))));
+          features.style.opacity = p;
+          if (p >= 1) {
+            features.style.webkitMaskImage = 'none';
+            features.style.maskImage = 'none';
+          } else {
+            var top = Math.round(180 * (1 - p));
+            var bot = Math.round(120 * (1 - p));
+            var m = 'linear-gradient(to bottom, transparent 0px, black ' + top + 'px, black calc(100% - ' + bot + 'px), transparent 100%)';
+            features.style.webkitMaskImage = m;
+            features.style.maskImage = m;
+          }
         }
         window.addEventListener('scroll', updateAbout, { passive: true });
         updateAbout();
