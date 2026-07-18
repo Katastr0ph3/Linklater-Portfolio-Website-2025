@@ -124,11 +124,13 @@
               </div>
             </div>
             <!-- Text fades out over the video -->
+            <!-- TEMPORARILY DISABLED
             <div class="hero-text">
               <div class="hero-line-wrap"><p class="hero-line">Let me breathe life</p></div>
               <div class="hero-line-wrap"><p class="hero-line">into your game project</p></div>
               <div class="hero-line-wrap"><p class="hero-line hero-line--accent">with audio.</p></div>
             </div>
+            -->
           </div>
         </section>
         <script src="https://player.vimeo.com/api/player.js"></script>
@@ -230,30 +232,6 @@
           </div>
         </section>
 
-        <!-- Pricing Section -->
-        <section id="pricing" class="wrapper style2">
-          <div class="container pricing-container">
-            <div class="pricing-sprites top">
-              <img src="images/cattern_gifs/animation_08.gif" alt="" class="pixel-sprite" />
-            </div>
-            <h2 class="pixel-heading">How much will it cost?</h2>
-            <div class="pricing-body">
-              <p><strong>It takes 30 minutes to work that out.</strong></p>
-              <p>Sound for games isn't one-size-fits-all. Your game has its own feel, scope, and needs — and the quote should reflect that, not a flat rate off a price list.</p>
-              <p>To give you an accurate price, I start with a free 30–60 minute Discovery Call. I'll ask about your project, your vision, and what you're hoping the audio will do for players. From there, I put together a tailored proposal.</p>
-              <p>This call also helps us figure out if we're a good match. I care about the projects I take on, and I want to make sure I can genuinely make your game sound great.</p>
-            </div>
-            <div class="pricing-sprites bottom">
-              <img src="images/cattern_gifs/animation_13.gif" alt="" class="pixel-sprite" />
-            </div>
-            <h2 class="pixel-heading">Get started</h2>
-            <ol class="pricing-steps">
-              <li>Send me an email at <a href="mailto:info@catlinklateraudio.com">info@catlinklateraudio.com</a></li>
-              <li>I'll send you a link to book a free 30–60 minute Discovery Call.</li>
-              <li>We'll talk through your game and I'll put together a tailored proposal.</li>
-            </ol>
-          </div>
-        </section>
 
         <!-- Footer -->
         <section id="footer" class="wrapper">
@@ -370,64 +348,5 @@
     <script src="assets/js/breakpoints.min.js"></script>
     <script src="assets/js/util.js"></script>
     <script src="assets/js/main.js"></script>
-    <script>
-      (function(){
-        var hero  = document.getElementById('hero');
-        var text  = hero.querySelector('.hero-text');
-        var video = hero.querySelector('.hero-video');
-        var lines = hero.querySelectorAll('.hero-line');
-
-        var starts   = [0.04, 0.22, 0.40]; // when each line starts revealing
-        var dur      = 0.16;  // scroll fraction each line takes to fully reveal
-        var textFade = 0.62;  // text starts fading
-        var vidFade  = 0.58;  // video starts fading IN
-        var vidPeak  = 0.80;  // video reaches full opacity and stays there
-
-        function ease(t){ return t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2; }
-        function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
-
-        function update(){
-          var scrolled = window.pageYOffset - hero.offsetTop;
-          var total    = hero.offsetHeight - window.innerHeight;
-          var progress = clamp(scrolled / total, 0, 1);
-
-          lines.forEach(function(line, i){
-            var p = ease(clamp((progress - starts[i]) / dur, 0, 1));
-            line.style.transform = 'translateY(' + ((1-p)*110) + '%)';
-          });
-
-          var textP = ease(clamp((progress - textFade) / (1 - textFade), 0, 1));
-          text.style.opacity = 1 - textP;
-
-          // Video fades in and stays — about section crossfades over the top
-          var vidIn = ease(clamp((progress - vidFade) / (vidPeak - vidFade), 0, 1));
-          video.style.opacity = vidIn;
-        }
-
-        window.addEventListener('scroll', update, { passive: true });
-        update();
-
-        // About section fade in from black, mask dissolves when fully in view
-        var features = document.getElementById('features');
-        features.style.opacity = 0;
-        function updateAbout() {
-          var rect = features.getBoundingClientRect();
-          var p = Math.max(0, Math.min(1, 1 - (rect.top / (window.innerHeight * 1.3))));
-          features.style.opacity = p;
-          if (p >= 1) {
-            features.style.webkitMaskImage = 'none';
-            features.style.maskImage = 'none';
-          } else {
-            var top = Math.round(180 * (1 - p));
-            var bot = Math.round(120 * (1 - p));
-            var m = 'linear-gradient(to bottom, transparent 0px, black ' + top + 'px, black calc(100% - ' + bot + 'px), transparent 100%)';
-            features.style.webkitMaskImage = m;
-            features.style.maskImage = m;
-          }
-        }
-        window.addEventListener('scroll', updateAbout, { passive: true });
-        updateAbout();
-      })();
-    </script>
   </body>
 </html>
