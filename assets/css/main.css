@@ -3181,6 +3181,27 @@ section#intro.wrapper {
   margin-bottom: 3em;
 }
 
+/* CV Download Button */
+.cv-download-btn {
+  display: inline-block;
+  margin-top: 1.2em;
+  padding: 0.6em 1.6em;
+  background: rgba(180, 142, 207, 0.15);
+  color: #b48ecf !important;
+  border: 1px solid #b48ecf;
+  border-radius: 4px;
+  font-size: 0.85em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cv-download-btn:hover {
+  background: #b48ecf;
+  color: #fff !important;
+}
+
 /* Project Card Grid */
 .projects-grid {
   display: grid !important;
