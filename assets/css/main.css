@@ -3184,17 +3184,14 @@ section#intro.wrapper {
 /* Project Card Grid */
 .projects-grid {
   display: grid !important;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2em;
   margin-top: 2em;
   width: 100%;
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 800px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 600px) {
   .projects-grid { grid-template-columns: 1fr; }
 }
 
