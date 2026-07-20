@@ -3183,7 +3183,9 @@ section#intro.wrapper {
 
 /* CV Download Button */
 .cv-download-btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1.2em;
   padding: 0.6em 1.6em;
   background: rgba(180, 142, 207, 0.15);
@@ -3194,7 +3196,7 @@ section#intro.wrapper {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none !important;
-  text-align: center;
+  line-height: 1;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
