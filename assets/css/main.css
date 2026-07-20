@@ -3187,11 +3187,11 @@ section#intro.wrapper {
   align-items: center;
   justify-content: center;
   margin-top: 1.2em;
-  padding: 0.6em 1.6em;
-  background: rgba(180, 142, 207, 0.15);
+  padding: 0.5em 2.8em;
+  background: rgba(180, 142, 207, 0.25);
   color: #b48ecf !important;
   border: 1px solid #b48ecf;
-  border-radius: 4px;
+  border-radius: 8px;
   font-size: 0.85em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
