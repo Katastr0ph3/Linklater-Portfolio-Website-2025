@@ -3194,6 +3194,7 @@ section#intro.wrapper {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none !important;
+  text-align: center;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
