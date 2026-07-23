@@ -2376,7 +2376,7 @@ section#intro.wrapper {
 /* Features / About */
 #features {
   padding: 4em 2em;
-  background: #ffffff;
+  background: #1a1a1e url("images/overlay.png");
   position: relative;
   z-index: 1;
 }
@@ -2410,19 +2410,19 @@ section#intro.wrapper {
 .about-text h2 {
   font-size: 2em;
   margin-bottom: 0.5em;
-  color: #484d55;
+  color: #e8e8ec;
 }
 
 .about-text h3 {
   margin: 1.2em 0 0.4em;
-  color: #484d55;
+  color: #b48ecf;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.85em;
 }
 
 .about-text p {
-  color: #919499;
+  color: #a8a9ad;
   line-height: 1.7;
   margin: 0;
 }
